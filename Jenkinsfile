@@ -20,31 +20,26 @@ pipeline {
 
 
 	stage('Docker Build') {
-	    step {
-	       script {
+	    steps {
 		   script {
 			if (fileExists('Dockerfile')) {
-			    sh "docker build -t ${env.DOCKER_IMAGE}."
+			    sh "docker build -t ${env.DOCKER_IMAGE} ."
 			} else {
-			    erro "Dockerfile not found in the workspaces. Please create one for your python app
+			    error "Dockerfile not found in the workspaces. Please create one for your python app
 lication."
 
 			}
-		}
-
-
-	}
-
-
-}
+		  }
+	    }
+     }
 
 	stage('Docker Run (Optional)') {
 		steps {
-			sh "docker run --rm ${ennv.DOCKER_IMAGE}"
+			sh "docker run --rm ${env.DOCKER_IMAGE}"
 			}  
 		}
 
-}
+    }
 
 
 	post { 
